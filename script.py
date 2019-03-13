@@ -1,5 +1,9 @@
 from urllib import urlopen as o
-lists = open(raw_input('IP list file name: '), 'r').read().split('\n')
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-l', '--list', help='list of IPs')
+args = parser.parse_args()
+lists = open(args.list).read().split('\n')
 for ip in lists:
     print 'Looking', ip
     grab = 'null'
@@ -15,4 +19,4 @@ for ip in lists:
         continue
     grab = grab.split('\n')
     for domain in grab:
-        open('grabbed.txt', 'a+').write(domain + '\n')
+        open('reverse_result.txt', 'a+').write(domain + '\n')
